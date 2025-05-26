@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 120 60% 50%; /* Farm Green */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+
+  /* Custom farm colors */
+  --farm-green: 120 60% 50%; /* #4CAF50 */
+  --farm-blue: 207 90% 54%; /* #2196F3 */
+  --farm-orange: 36 100% 50%; /* #FF9800 */
+  --farm-red: 4 90% 58%; /* #F44336 */
+  --farm-light-green: 88 50% 53%; /* #8BC34A */
+  --farm-gray: 0 0% 96%; /* #F5F5F5 */
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 120 60% 50%; /* Farm Green - keep same in dark mode */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* Ensure proper touch targets for mobile */
+  button, 
+  [role="button"], 
+  input, 
+  select, 
+  textarea {
+    @apply min-h-[44px] touch-manipulation;
+  }
+
+  /* Smooth scrolling for mobile */
+  html {
+    @apply scroll-smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Custom utilities for farm theme */
+  .text-farm-green {
+    color: hsl(var(--farm-green));
+  }
+  
+  .bg-farm-green {
+    background-color: hsl(var(--farm-green));
+  }
+  
+  .border-farm-green {
+    border-color: hsl(var(--farm-green));
+  }
+
+  .text-farm-blue {
+    color: hsl(var(--farm-blue));
+  }
+  
+  .bg-farm-blue {
+    background-color: hsl(var(--farm-blue));
+  }
+
+  .text-farm-orange {
+    color: hsl(var(--farm-orange));
+  }
+  
+  .bg-farm-orange {
+    background-color: hsl(var(--farm-orange));
+  }
+
+  .text-farm-red {
+    color: hsl(var(--farm-red));
+  }
+  
+  .bg-farm-red {
+    background-color: hsl(var(--farm-red));
+  }
+
+  /* Mobile-optimized form controls */
+  .mobile-select {
+    @apply appearance-none bg-white border border-gray-300 rounded-lg px-4 py-3 text-base;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  /* Animation for critical alerts */
+  @keyframes alert-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .alert-pulse {
+    animation: alert-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Zone hover effects */
+  .zone-hover {
+    transition: all 0.2s ease-in-out;
+  }
+
+  .zone-hover:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+
+  /* Modal backdrop blur effect */
+  .modal-backdrop {
+    backdrop-filter: blur(4px);
+  }
+
+  /* Pull-to-refresh indicator */
+  .pull-refresh {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-out;
+  }
+
+  .pull-refresh.active {
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .alert-pulse,
+  .zone-hover {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0% 20%;
+    --ring: 0 0% 20%;
+  }
+  
+  .dark {
+    --border: 0 0% 80%;
+    --ring: 0 0% 80%;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-blue-500;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 640px) {
+  /* Increase touch targets */
+  .mobile-touch {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Optimize text sizes */
+  .mobile-text {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  /* Safe area handling for notched devices */
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
